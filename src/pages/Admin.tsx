@@ -46,6 +46,20 @@ export const Admin: React.FC = () => {
     document.title = t('東勝会社 管理画面 | CMS', '东胜公司 管理系统 | CMS');
   }, [t]);
 
+  // 管理画面用の固定ファビコンを設定
+  useEffect(() => {
+    const faviconUrl = '/admin-favicon.svg'; // ← public フォルダに配置した固定アイコン
+    let favicon = document.querySelector("link[rel='icon']");
+    if (favicon) {
+      favicon.setAttribute('href', faviconUrl);
+    } else {
+      favicon = document.createElement('link');
+      favicon.setAttribute('rel', 'icon');
+      favicon.setAttribute('href', faviconUrl);
+      document.head.appendChild(favicon);
+    }
+  }, []);
+  
   // 未ログインの場合はログインページへリダイレクト
   useEffect(() => {
     if (!user && !loading) {
